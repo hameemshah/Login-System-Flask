@@ -1,0 +1,17 @@
+{% extends 'components/base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Login Page{% endblock %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+            <p>{{ msg }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h1 align="center">Admin Login</h1>
+    <div class="container">
+        {{ render_form(form) }}
+        <a href="{{ url_for('admin.signup') }}">Don't have an account? Signup here</a>
+    </div>
+{% endblock %}

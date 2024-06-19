@@ -1,0 +1,15 @@
+{% extends 'components/base.html' %}
+{% from 'bootstrap4/table.html' import render_table %}
+{% block title %}User Page{% endblock %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+            <p>{{ msg }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h1>Welcome, {{ user }}</h1>
+    <p>The list of users stored in the database are:</p>
+    {{ render_table(data) }}
+{% endblock %}

@@ -14,5 +14,5 @@ def load_user(user_id):
     from .models.user import User
     return db.get_or_404(User, user_id)
 
-# Ensure the import path is correct based on your project structure
+# Ensure the import path is correct based on the project structure
 from .routes import main_routes

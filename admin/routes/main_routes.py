@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash
 from flask_login import current_user, login_user, logout_user
 from .. import admin_bp, db
 from ..models.user import User
-from ..forms.admin_forms import LoginForm
+from ..forms.admin_forms import LoginForm, SignupForm
 
 @admin_bp.route("/", methods=["GET", "POST"])
 def home():
@@ -17,14 +17,14 @@ def home():
             flash("You are successfully logged in!")
             return redirect(url_for("admin.user"))
         flash("Invalid username or password")
-    return render_template("index.html", form=my_form)
+    return render_template("login.html", form=my_form)
 
 @admin_bp.route("/signup", methods=["GET", "POST"])
 def signup():
     if current_user.is_authenticated:
         flash("You are already signed in!")
         return redirect(url_for("admin.user"))
-    my_form = LoginForm()
+    my_form = SignupForm()
     if my_form.validate_on_submit():
         user = User.query.filter_by(email=my_form.email.data).first()
         if user:
@@ -41,8 +41,9 @@ def signup():
 
 @admin_bp.route("/logout")
 def logout():
-    logout_user()
-    flash("You logged out successfully!")
+    if current_user.is_authenticated:
+        logout_user()
+        flash("You logged out successfully!")
     return redirect(url_for("admin.home"))
 
 @admin_bp.route("/user")

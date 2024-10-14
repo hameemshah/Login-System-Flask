@@ -4,8 +4,8 @@
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/your-repo.git
-   cd your-repo
+   https://github.com/hameemshah/Login-System-Flask.git
+   cd Login-System-Flask
    ```
 
 2. Create a virtual environment and activate it:
